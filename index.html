@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0e11">
+  <meta name="description" content="Your mission. Your moment. A precise launch countdown with manual sequence controls and scheduled liftoff.">
+  <title>T-Zero · Launch control</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./style.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#controls">Skip to clock controls</a>
+  <div class="shell">
+    <header class="masthead">
+      <a class="brand" href="./" aria-label="T-Zero home"><span class="brand-mark" aria-hidden="true">T<span>−</span>0</span><span>T-ZERO<small>LAUNCH CONTROL</small></span></a>
+      <div class="header-right"><span class="version">FLIGHT SYSTEMS / V0.1</span><button id="fullscreen" class="quiet" type="button">⛶ <span>Fullscreen</span></button></div>
+    </header>
+    <main>
+      <div class="intro"><div><p class="eyebrow">MISSION CONTROL / 001</p><h1>Every second counts.</h1></div><p class="intro-note">Your mission. Your moment.<br>All systems on your mark.</p></div>
+      <section class="clock-panel" aria-labelledby="mission-heading">
+        <div class="panel-top"><h2 id="mission-heading">NEXT HORIZON</h2><span id="status" class="status" role="status">STANDING BY</span></div>
+        <div class="clock-wrap"><p id="clock" role="timer" aria-live="off" aria-label="T minus 0 hours 10 minutes 0 seconds"><span class="prefix">T<span id="sign">−</span></span><span class="unit"><span id="hours">00</span><small>HOURS</small></span><span class="colon">:</span><span class="unit"><span id="minutes">10</span><small>MINUTES</small></span><span class="colon">:</span><span class="unit"><span id="seconds">00</span><small>SECONDS</small></span></p></div>
+        <div class="sequence" aria-hidden="true"><span>SEQUENCE INIT</span><div class="track"><i id="progress"></i></div><span>T ZERO <b>+</b></span></div>
+        <div class="panel-bottom"><span><i class="dot"></i><span id="clock-note">Manual sequence · Ready to start</span></span><span id="utc-time">UTC --:--:--</span></div>
+      </section>
+      <div class="console-grid" id="controls">
+        <section class="settings" aria-labelledby="config-title">
+          <div class="section-title"><h2 id="config-title">Flight configuration</h2><span>01 / SETUP</span></div>
+          <label for="mission">MISSION NAME</label><input id="mission" maxlength="48" placeholder="Name your mission" autocomplete="off">
+          <div class="mode-switch" role="group" aria-label="Clock mode"><button id="manual-mode" type="button" aria-pressed="true">Manual sequence</button><button id="exact-mode" type="button" aria-pressed="false">Launch date & time</button></div>
+          <form id="manual-form">
+            <fieldset><legend>COUNTDOWN DURATION</legend><div class="duration"><label><input id="duration-hours" type="number" min="0" max="999" step="1" value="0" required inputmode="numeric">Hours</label><span>:</span><label><input id="duration-minutes" type="number" min="0" max="59" step="1" value="10" required inputmode="numeric">Minutes</label><span>:</span><label><input id="duration-seconds" type="number" min="0" max="59" step="1" value="0" required inputmode="numeric">Seconds</label></div></fieldset>
+            <button class="secondary wide" id="set-duration" type="submit">Set countdown</button><p class="hint" id="duration-hint">Set your duration, then start the sequence.</p>
+          </form>
+          <form id="exact-form" hidden>
+            <div class="date-label"><label for="launch-date">LAUNCH DATE & TIME</label><select id="zone" aria-label="Launch time zone"><option value="local">Local time</option><option value="utc">UTC</option></select></div>
+            <input id="launch-date" type="datetime-local" step="1" required aria-describedby="zone-hint"><p class="hint" id="zone-hint"></p>
+            <button class="secondary wide" type="submit">Set launch time</button><p class="hint">Past launch times begin in T+ elapsed time.</p>
+          </form>
+        </section>
+        <section class="operations" aria-labelledby="ops-title">
+          <div class="section-title"><h2 id="ops-title">Sequence control</h2><span>02 / OPERATE</span></div>
+          <div id="manual-controls"><p class="operations-copy" id="operation-copy">The next milestone starts with you.</p><button id="start" class="primary wide" type="button">▶ Start sequence</button><div class="button-row"><button id="hold" class="secondary" type="button" disabled>Ⅱ Hold</button><button id="reset" class="secondary" type="button">↺ Reset</button></div><p class="hint">Hold freezes the clock. Resume picks up exactly where you left off.</p></div>
+          <div id="exact-controls" hidden><p class="operations-copy">Locked to your launch moment.</p><p class="scheduled-text" id="target-summary">Set a launch date to begin the countdown.</p><p class="hint">The clock follows the scheduled instant, even when this page is closed. Update the launch time to reschedule.</p></div>
+          <div class="system-note"><span class="note-icon" aria-hidden="true">↗</span><div><h3>Beyond zero.</h3><p>At liftoff, T− becomes T+. Your mission clock keeps going.</p></div></div>
+        </section>
+      </div>
+      <p id="message" role="status" class="message"></p>
+      <p id="storage-warning" role="alert" class="warning" hidden>Browser storage is unavailable. Keep this page open; changes cannot be saved.</p>
+      <noscript><p class="warning">Enable JavaScript to run T-Zero. The clock is inactive without it.</p></noscript>
+    </main>
+    <footer><span><i class="dot"></i> <span id="save-status">CONFIGURATION SAVED LOCALLY</span></span><span>INDEPENDENT PROJECT · INSPIRED BY MISSION CONTROL</span><a href="https://github.com/h27096/T-Zero">SOURCE ↗</a></footer>
+  </div>
+</body>
+</html>

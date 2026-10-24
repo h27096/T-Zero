@@ -1,0 +1,9 @@
+{
+  "name": "t-zero",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A mission-control launch clock for GitHub Pages",
+  "scripts": { "test": "node --test", "start": "node scripts/serve.mjs" },
+  "engines": { "node": ">=22" }
+}
